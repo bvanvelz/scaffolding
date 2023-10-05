@@ -1,9 +1,10 @@
-# doc - https://docs.python.org/3.3/library/argparse.html#nargs
 import argparse
+from datetime import datetime
+import sys
 
 VERSION = 1.0
 
-def process_args():
+def process_args(args):
 	parser = argparse.ArgumentParser(description='CLI scaffolding.')
 	parser.add_argument('--version', action='version', version=str(VERSION))
 	parser.add_argument('-f', '--flag', action='store_true',
@@ -13,15 +14,16 @@ def process_args():
 	parser.add_argument('--option', dest='option1_dest',
 		                help='option1 desc')
 
-	args = parser.parse_args()	
-	print("args={}".format(args))
+	return parser.parse_args(args)
 
-	if hasattr(args, 'option1'):
-		print("args.option1={}".format(args.option1))	
+def get_datestr():
+	return datetime.now().strftime('%Y-%m-%d')
 
-def main():
-	print("Hello world.")
+def main(args):
+	print("Command line args: {}".format(args))
+
+	print("Current datestr: {}".format(get_datestr()))
 
 if __name__ == "__main__":
-	process_args()
-	main()
+	args = process_args(sys.argv[1:])
+	main(args)
