@@ -15,7 +15,7 @@ python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. proto/service
 Start Server
 ```
 source env/bin/activate
-python server.py
+python service.py
 ```
 
 Run client
