@@ -8,14 +8,14 @@ key_values = {'k1': 'v1',
 # get all key values
 @app.route('/api/v1/key_values', methods=['GET'])
 def get_key_values():
-    return jsonify(data), 400
+    return jsonify(key_values), 200
 
 # get a key's value
 @app.route('/api/v1/key_values/<key>', methods=['GET'])
 def get_value(key):
-    if key not in data:
+    if key not in key_values:
         return jsonify({'error': "Key not found"}), 404
-    return jsonify(data[key])
+    return jsonify({key: key_values[key]})
 
 # create new key_value pair
 @app.route('/api/v1/key_values', methods=['POST'])
@@ -41,7 +41,7 @@ def delete_key_value(key):
     if key not in key_values:
         return jsonify({'error': 'Key not found'}), 404
     del(key_values[key])
-    return jsonify({'result': True}), 200
+    return jsonify({'result': 'success'}), 200
 
 
 if __name__ == '__main__':
