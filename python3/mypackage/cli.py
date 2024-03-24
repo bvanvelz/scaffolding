@@ -1,8 +1,16 @@
 import argparse
 from datetime import datetime
+import logging
 import sys
 
+
 VERSION = 1.0
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+# Create a logger
+logger = logging.getLogger(__name__)
 
 def process_args(args):
 	parser = argparse.ArgumentParser(description='CLI scaffolding.')
@@ -20,9 +28,9 @@ def get_datestr():
 	return datetime.now().strftime('%Y-%m-%d')
 
 def main(args):
-	print("Command line args: {}".format(args))
+	logger.info("Command line args: {}".format(args))
 
-	print("Current datestr: {}".format(get_datestr()))
+	logger.info("Current datestr: {}".format(get_datestr()))
 
 if __name__ == "__main__":
 	args = process_args(sys.argv[1:])
